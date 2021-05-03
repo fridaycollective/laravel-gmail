@@ -1,5 +1,5 @@
 {
-  "name": "swandoola/laravel-gmail",
+  "name": "fridaycollective/laravel-gmail",
   "description": "Gmail API package for Laravel based on dacastro4/laravel-gmail",
   "keywords": [
     "api",
@@ -9,9 +9,9 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Alex & Georgi",
-      "email": "tech@swandoola.com",
-      "homepage": "https://swandoola.com"
+      "name": "Alex & Dean",
+      "email": "hey@fridaycollective.co.uk",
+      "homepage": "https://fridaycollective.co.uk"
     }
   ],
   "require": {
@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Swandoola\\LaravelGmail\\": "src/"
+      "FridayCollective\\LaravelGmail\\": "src/"
     }
   },
   "autoload-dev": {

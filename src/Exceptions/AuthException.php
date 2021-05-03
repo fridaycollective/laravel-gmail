@@ -1,6 +1,6 @@
 <?php
 
-namespace Swandoola\LaravelGmail\Exceptions;
+namespace FridayCollective\LaravelGmail\Exceptions;
 
 class AuthException extends \Exception
 {

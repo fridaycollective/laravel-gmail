@@ -42,7 +42,7 @@ Now open up `config/app.php` and add the service provider to your providers arra
 
 ``` php
 'providers' => [
-    Swandoola\LaravelGmail\LaravelGmailServiceProvider::class,
+    FridayCollective\LaravelGmail\LaravelGmailServiceProvider::class,
 ]
 ```
 
@@ -50,7 +50,7 @@ Now add the alias.
 
 ``` php
 'aliases' => [
-    'LaravelGmail' => Swandoola\LaravelGmail\Facade\LaravelGmail::class,
+    'LaravelGmail' => FridayCollective\LaravelGmail\Facade\LaravelGmail::class,
 ]
 ```
 
@@ -110,7 +110,7 @@ GOOGLE_ALLOW_JSON_ENCRYPT
 
 To modify the scopes and the credentials file name, just run:
 
-Run `php artisan vendor:publish --provider="Swandoola\LaravelGmail\LaravelGmailServiceProvider"` and modify the config file `config/gmail.php`.
+Run `php artisan vendor:publish --provider="FridayCollective\LaravelGmail\LaravelGmailServiceProvider"` and modify the config file `config/gmail.php`.
 
 ### Allow multi user credentials
 To allow multi user credentials change `allow_multiple_credentials` to `true` in your config file or set the .env variable 
@@ -211,7 +211,7 @@ and after that you don't have to call it again.
 ## Sending
 
 ```
-use Swandoola\LaravelGmail\Services\Message\Mail;
+use FridayCollective\LaravelGmail\Services\Message\Mail;
 
 ...
 
@@ -310,7 +310,7 @@ For `to`, `from`, `cc` and `bcc`, you can set an array of emails and name or a s
 ## Attachment
 
 ```
-use Swandoola\LaravelGmail\Services\Message\Attachment
+use FridayCollective\LaravelGmail\Services\Message\Attachment
 ...
 
 $attachment = new Attachment;
