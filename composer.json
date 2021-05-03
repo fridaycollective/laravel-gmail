@@ -46,6 +46,13 @@
     "sort-packages": true,
     "optimize-autoloader": true
   },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "FridayCollective\\LaravelGmail\\LaravelGmailServiceProvider"
+      ]
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
