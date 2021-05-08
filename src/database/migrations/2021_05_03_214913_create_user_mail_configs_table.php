@@ -21,6 +21,7 @@ class CreateUserMailConfigsTable extends Migration
             $table->string('status');
             $table->integer('initial_sync_days')->default(30);
             $table->uuid('state_uuid')->nullable();
+            $table->dateTime('last_synced')->nullable();
             $table->timestamps();
 
             $table->index('user_id');
