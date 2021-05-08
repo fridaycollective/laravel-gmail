@@ -52,37 +52,9 @@ return [
     |
     */
 
-    'calendar_scopes' => [
-        'https://www.googleapis.com/auth/calendar.events email',
-    ],
-
     'access_type' => 'offline',
 
     'approval_prompt' => 'force',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Credentials File Name
-    |--------------------------------------------------------------------------
-    |
-    |   :email to use, clients email on the file
-    |
-    |
-    */
-
-    'credentials_file_name' => env('GOOGLE_CREDENTIALS_NAME', 'gmail-json'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Allow Multiple Credentials
-    |--------------------------------------------------------------------------
-    |
-    |   Allow the application to store multiple credential json files.
-    |
-    |
-    */
-
-    'allow_multiple_credentials' => env('GOOGLE_ALLOW_MULTIPLE_CREDENTIALS', false),
 
     /*
     |--------------------------------------------------------------------------

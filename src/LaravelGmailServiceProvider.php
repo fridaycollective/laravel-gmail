@@ -23,6 +23,11 @@ class LaravelGmailServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/config/gmail.php' => config_path('gmail.php'),
+        ]);
+
+        $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }
