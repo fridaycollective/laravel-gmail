@@ -247,6 +247,8 @@ class GmailConnection extends Google_Client
             $credentials->config = null;
             $credentials->save();
         }
+
+        $credentials->delete();
     }
 
 }
