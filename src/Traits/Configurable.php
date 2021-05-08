@@ -51,13 +51,7 @@ trait Configurable
 
     private function getClientGmailCredentials()
     {
-        $allowMultipleCredentials = $this->_config['allow_multiple_credentials'];
-
-        if ($allowMultipleCredentials) {
-
-            return $this->_integrationConfig;
-        }
-        return false;
+        return $this->_integrationConfig;
     }
 
     /**
