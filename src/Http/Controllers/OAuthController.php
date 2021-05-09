@@ -14,7 +14,11 @@ class OAuthController extends Controller
 {
     public function fetchMailConfig()
     {
-        return auth()->user()->mailConfig;
+        $mailConfig = auth()->user()->mailConfig;
+        if ($mailConfig && $mailConfig->status !== 'pending'){
+            return $mailConfig;
+        }
+        return null;
     }
 
     public function gmailRedirect()
@@ -42,6 +46,10 @@ class OAuthController extends Controller
         $mailConfig->status = "active";
         $mailConfig->save();
 
+        UserMailConfig::where('user_id', $mailConfig->user_id)
+            ->where('status', 'pending')
+            ->delete();
+
         return redirect()->to(env('PORTAL_URL') . '/settings/email-integration');
     }
 
@@ -51,6 +59,11 @@ class OAuthController extends Controller
 
         $gmailService = new LaravelGmail($mailConfig);
         $gmailService->logout();
+
+        UserMailConfig::where('user_id', auth()->user()->id)
+            ->where('status', 'pending')
+            ->delete();
+
 
         return response()->json(['message' => 'Disconnected from Google']);
     }
