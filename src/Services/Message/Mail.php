@@ -82,7 +82,7 @@ class Mail extends GmailConnection
 
         $this->__rConstruct();
         $this->__mConstruct();
-        parent::__construct(config(), $emailIntegrationConfig);
+        parent::__construct(config()['gmail'], $emailIntegrationConfig);
 
         if (!is_null($message)) {
             if ($preload) {
