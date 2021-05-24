@@ -73,13 +73,16 @@ class Mail extends GmailConnection
      * @param bool $preload
      * @param int $userId
      */
-    public function __construct(\Google_Service_Gmail_Message $message = null, $preload = false, $userId = null)
+    public function __construct(\Google_Service_Gmail_Message $message = null,
+                                $preload = false,
+                                $emailIntegrationConfig = null
+    )
     {
         $this->service = new Google_Service_Gmail($this);
 
         $this->__rConstruct();
         $this->__mConstruct();
-        parent::__construct(config(), $userId);
+        parent::__construct(config(), $emailIntegrationConfig);
 
         if (!is_null($message)) {
             if ($preload) {

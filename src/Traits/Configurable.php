@@ -15,7 +15,7 @@ trait Configurable
 
     protected $additionalScopes = [];
     private $_config;
-    private $_integrationConfig;
+    public $_integrationConfig;
 
     public function __construct($config, $integrationConfig)
     {
