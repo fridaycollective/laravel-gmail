@@ -24,7 +24,7 @@ class GmailConnection extends Google_Client
     private $configuration;
     public $userId;
 
-    public function __construct($config = null, $integrationConfig)
+    public function __construct($config, $integrationConfig)
     {
         $this->app = Container::getInstance();
 
@@ -225,6 +225,34 @@ class GmailConnection extends Google_Client
 
         return $service->users->getProfile('me');
     }
+
+    /**
+     * Subscribe to notifications via Cloud Pub/Sub
+     *
+     */
+    public function watch()
+    {
+        $service = new Google_Service_Gmail($this);
+
+        $params = new \Google_Service_Gmail_WatchRequest();
+        $params->setLabelIds(['INBOX']);
+        $params->setTopicName($this->_config['pubsub_topic_name']);
+
+        $response = $service->users->watch('me', $params);
+    }
+
+    /**
+     * Subscribe to notifications via Cloud Pub/Sub
+     *
+     */
+    public function stop()
+    {
+        $service = new Google_Service_Gmail($this);
+
+        return $service->users->stop('me');
+    }
+
+
 
     /**
      * Revokes user's permission and logs them out

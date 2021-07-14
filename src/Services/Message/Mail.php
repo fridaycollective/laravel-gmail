@@ -55,6 +55,11 @@ class Mail extends GmailConnection
     public $threadId;
 
     /**
+     * @var
+     */
+    public $historyId;
+
+    /**
      * @var \Google_Service_Gmail_MessagePart
      */
     public $payload;
@@ -75,10 +80,12 @@ class Mail extends GmailConnection
      */
     public function __construct(\Google_Service_Gmail_Message $message = null,
                                 $preload = false,
-                                $emailIntegrationConfig = null
+                                $emailIntegrationConfig = null,
+                                $historyId = null
     )
     {
         $this->service = new Google_Service_Gmail($this);
+        $this->historyId = $historyId;
 
         $this->__rConstruct();
         $this->__mConstruct();
@@ -102,7 +109,7 @@ class Mail extends GmailConnection
      *
      * @param \Google_Service_Gmail_Message $message
      */
-    protected function setMessage(\Google_Service_Gmail_Message $message)
+    protected function setMessage($message)
     {
         $this->id = $message->getId();
         $this->internalDate = $message->getInternalDate();
@@ -167,6 +174,16 @@ class Mail extends GmailConnection
     public function getThreadId()
     {
         return $this->threadId;
+    }
+
+    /**
+     * Returns history ID of the email
+     *
+     * @return string
+     */
+    public function getHistoryId()
+    {
+        return $this->historyId;
     }
 
     /**

@@ -22,6 +22,7 @@ class CreateUserMailConfigsTable extends Migration
             $table->integer('initial_sync_days')->default(30);
             $table->uuid('state_uuid')->nullable();
             $table->dateTime('last_synced')->nullable();
+            $table->string('gmail_last_history_id')->nullable();
             $table->timestamps();
 
             $table->index('user_id');
