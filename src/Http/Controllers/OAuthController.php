@@ -61,7 +61,7 @@ class OAuthController extends Controller
         $gmailService->logout();
 
         UserMailConfig::where('user_id', auth()->user()->id)
-            ->where('status', 'pending')
+            ->where('type', 'google')
             ->delete();
 
 
