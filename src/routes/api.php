@@ -34,8 +34,3 @@ Route::middleware('auth:api')->group(function () {
         });
     });
 });
-
-
-Route::prefix('webhooks')->group(function () {
-    Route::post('/gmail-pubsub', [PubSubController::class, 'handleWebhook']);
-});
