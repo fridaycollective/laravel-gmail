@@ -77,7 +77,8 @@ class Message
 
         if (!$this->preload) {
             foreach ($allMessages as $message) {
-                $messages[] = new Mail($message,
+                $messages[] = new Mail(
+                    $message,
                     $this->preload,
                     $this->client->_integrationConfig,
                     $message->historyId
@@ -114,7 +115,12 @@ class Message
 
         if (!$this->preload) {
             foreach ($allMessages as $message) {
-                $messages[] = new Mail($message, $this->preload, $this->client->_integrationConfig);
+                $messages[] = new Mail(
+                    $message,
+                    $this->preload,
+                    $this->client->_integrationConfig,
+                    $message->historyId
+                );
             }
         } else {
             $messages = $this->batchRequest($allMessages);
