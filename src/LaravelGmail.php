@@ -3,6 +3,7 @@
 namespace FridayCollective\LaravelGmail;
 
 use FridayCollective\LaravelGmail\Exceptions\AuthException;
+use FridayCollective\LaravelGmail\Services\History;
 use FridayCollective\LaravelGmail\Services\Message;
 use Illuminate\Support\Facades\Config;
 
@@ -30,6 +31,19 @@ class LaravelGmail extends GmailConnection
         }
 
         return new Message($this);
+    }
+
+    /**
+     * @return History
+     * @throws AuthException
+     */
+    public function history($startHistoryId)
+    {
+        if (!$this->getToken()) {
+            throw new AuthException('No credentials found.');
+        }
+
+        return new History($this, $startHistoryId);
     }
 
     /**

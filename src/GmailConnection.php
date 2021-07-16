@@ -239,10 +239,12 @@ class GmailConnection extends Google_Client
         $params->setTopicName($this->_config['pubsub_topic_name']);
 
         $response = $service->users->watch('me', $params);
+
+        return $response;
     }
 
     /**
-     * Subscribe to notifications via Cloud Pub/Sub
+     * Stop subscription to notifications via Cloud Pub/Sub
      *
      */
     public function stop()

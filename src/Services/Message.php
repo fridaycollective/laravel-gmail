@@ -94,44 +94,6 @@ class Message
     }
 
     /**
-     * Returns a collection of Mail instances
-     *
-     * @param null|string $pageToken
-     *
-     * @return \Illuminate\Support\Collection
-     * @throws \Google_Exception
-     */
-    public function incremental($pageToken = null)
-    {
-        if (!is_null($pageToken)) {
-            $this->add($pageToken, 'pageToken');
-        }
-
-        $messages = [];
-        $response = $this->getIncrementalMessagesResponse();
-        $this->pageToken = method_exists($response, 'getNextPageToken') ? $response->getNextPageToken() : null;
-
-        $allMessages = $response->getMessages();
-
-        if (!$this->preload) {
-            foreach ($allMessages as $message) {
-                $messages[] = new Mail(
-                    $message,
-                    $this->preload,
-                    $this->client->_integrationConfig,
-                    $message->historyId
-                );
-            }
-        } else {
-            $messages = $this->batchRequest($allMessages);
-        }
-
-        $all = new MessageCollection($messages, $this);
-
-        return $all;
-    }
-
-    /**
      * Returns boolean if the page token variable is null or not
      *
      * @return bool
@@ -238,25 +200,6 @@ class Message
     private function getMessagesResponse()
     {
         $responseOrRequest = $this->service->users_messages->listUsersMessages('me', $this->params);
-
-        if (get_class($responseOrRequest) === "GuzzleHttp\Psr7\Request") {
-            $response = $this->service->getClient()->execute($responseOrRequest, 'Google_Service_Gmail_ListMessagesResponse');
-
-            return $response;
-        }
-
-        return $responseOrRequest;
-    }
-
-    /**
-     * @return \Google_Service_Gmail_ListMessagesResponse|object
-     * @throws \Google_Exception
-     */
-    private function getIncrementalMessagesResponse($startHistoryId)
-    {
-        $responseOrRequest = $this->service->users_history->listUsersHistory('me', [
-            'startHistoryId' => $startHistoryId
-        ]);
 
         if (get_class($responseOrRequest) === "GuzzleHttp\Psr7\Request") {
             $response = $this->service->getClient()->execute($responseOrRequest, 'Google_Service_Gmail_ListMessagesResponse');
