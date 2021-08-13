@@ -37,18 +37,22 @@ class OAuthController extends Controller
 
     public function gmailCallback()
     {
-        $stateUuid = Request::capture()->get('state');
-        $mailConfig = UserMailConfig::where('state_uuid', $stateUuid)->first();
+        $error = Request::capture()->get('error');
 
-        $gmailService = new LaravelGmail($mailConfig);
-        $gmailService->makeToken();
+        if (!$error) {
+            $stateUuid = Request::capture()->get('state');
+            $mailConfig = UserMailConfig::where('state_uuid', $stateUuid)->first();
 
-        $mailConfig->status = "active";
-        $mailConfig->save();
+            $gmailService = new LaravelGmail($mailConfig);
+            $gmailService->makeToken();
 
-        UserMailConfig::where('user_id', $mailConfig->user_id)
-            ->where('status', 'pending')
-            ->delete();
+            $mailConfig->status = "active";
+            $mailConfig->save();
+
+            UserMailConfig::where('user_id', $mailConfig->user_id)
+                ->where('status', 'pending')
+                ->delete();
+        }
 
         return redirect()->to(env('PORTAL_URL') . '/settings/email-integration');
     }
