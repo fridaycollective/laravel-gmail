@@ -12,6 +12,7 @@
 
 
 use FridayCollective\LaravelGmail\Http\Controllers\OAuthController;
+use FridayCollective\LaravelGmail\Http\Controllers\PubSubController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function () {

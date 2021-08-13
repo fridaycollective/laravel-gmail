@@ -58,10 +58,11 @@ class OAuthController extends Controller
         $mailConfig = auth()->user()->mailConfig;
 
         $gmailService = new LaravelGmail($mailConfig);
+        $gmailService->stop();
         $gmailService->logout();
 
         UserMailConfig::where('user_id', auth()->user()->id)
-            ->where('status', 'pending')
+            ->where('type', 'google')
             ->delete();
 
 
