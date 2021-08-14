@@ -298,7 +298,11 @@ trait Replyable
         $body = $this->getMessageBody();
         $body->setThreadId($this->getThreadId());
 
-        return new Mail($this->service->users_messages->send('me', $body, $this->parameters));
+        $new_reply_message = $this->service->users_messages->send('me', $body, $this->parameters);
+
+        $this->setMessage($new_reply_message);
+
+        return new Mail($new_reply_message);
     }
 
     public abstract function getId();
