@@ -2,11 +2,10 @@
 
 namespace FridayCollective\LaravelGmail\Http\Controllers;
 
-
-use Carbon\Carbon;
 use FridayCollective\LaravelGmail\LaravelGmail;
 use FridayCollective\LaravelGmail\Models\UserMailConfig;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 
@@ -61,9 +60,18 @@ class OAuthController extends Controller
     {
         $mailConfig = auth()->user()->mailConfig;
 
-        $gmailService = new LaravelGmail($mailConfig);
-        $gmailService->stop();
-        $gmailService->logout();
+        try {
+            $gmailService = new LaravelGmail($mailConfig);
+            $gmailService->stop();
+            $gmailService->logout();
+        } catch (\Exception $exception) {
+            try {
+                $gmailService = new LaravelGmail($mailConfig);
+                $gmailService->logout();
+            } catch (\Exception $exception) {
+                Log::warning("Error disconnecting gmail. Forcing removal.");
+            }
+        }
 
         UserMailConfig::where('user_id', auth()->user()->id)
             ->where('type', 'google')
