@@ -8,6 +8,7 @@ class UserMailConfig extends Model
 {
     protected $fillable = [
       "user_id",
+      "email",
       "config",
       "type",
       "status",

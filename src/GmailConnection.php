@@ -162,16 +162,9 @@ class GmailConnection extends Google_Client
                 }
             }
 
-            $credentials->config = null;
+            $credentials->email = $config['email'];
+            $credentials->config = $allowJsonEncrypt ? encrypt(json_encode($config)) : json_encode($config);
             $credentials->save();
-
-            if ($allowJsonEncrypt) {
-                $credentials->config = encrypt(json_encode($config));
-                $credentials->save();
-            } else {
-                $credentials->config = json_encode($config);
-                $credentials->save();
-            }
         }
 
     }
