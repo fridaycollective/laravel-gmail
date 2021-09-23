@@ -25,7 +25,7 @@ class AlterUserMailConfigsAddEmail extends Migration
      */
     public function down()
     {
-        Schema::create('user_mail_configs', function (Blueprint $table) {
+        Schema::table('user_mail_configs', function (Blueprint $table) {
             $table->dropColumn('email');
         });
     }
