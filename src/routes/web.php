@@ -12,7 +12,7 @@ Route::prefix('api')->group(function () {
     });
 });
 
-Route::middleware(Config::get('gmail.middleware')->group(function () {
+Route::middleware(Config::get('gmail.middleware'))->group(function () {
     Route::prefix('api')->group(function () {
         Route::get('/mail-config', [OAuthController::class, 'fetchMailConfig']);
         Route::prefix('oauth')->group(function () {
