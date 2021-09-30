@@ -1,6 +1,7 @@
 <?php
 
 use FridayCollective\LaravelGmail\Http\Controllers\OAuthController;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('api')->group(function () {
@@ -11,7 +12,7 @@ Route::prefix('api')->group(function () {
     });
 });
 
-Route::middleware('web')->group(function () {
+Route::middleware(Config::get('gmail.middleware')->group(function () {
     Route::prefix('api')->group(function () {
         Route::get('/mail-config', [OAuthController::class, 'fetchMailConfig']);
         Route::prefix('oauth')->group(function () {
