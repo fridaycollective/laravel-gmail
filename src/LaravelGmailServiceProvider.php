@@ -27,7 +27,17 @@ class LaravelGmailServiceProvider extends ServiceProvider
             __DIR__.'/config/gmail.php' => config_path('gmail.php'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        switch (config('gmail.load_routes_from')) {
+            case 'web':
+                $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+                break;
+            case 'api':
+                $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+                break;
+            default:
+                break;
+        }
+
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 }

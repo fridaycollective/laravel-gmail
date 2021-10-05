@@ -8,7 +8,7 @@ Route::prefix('api')->group(function () {
     Route::get('/oauth/gmail/callback', [OAuthController::class, 'gmailCallback']);
 });
 
-Route::middleware(Config::get('gmail.middleware'))->group(function () {
+Route::middleware(['api', Config::get('gmail.middleware')])->group(function () {
     Route::prefix('api')->group(function () {
         Route::get('/mail-config', [OAuthController::class, 'fetchMailConfig']);
         Route::prefix('oauth')->group(function () {
